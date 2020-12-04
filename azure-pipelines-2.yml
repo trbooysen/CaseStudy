@@ -1,0 +1,25 @@
+name : Docker-ServiceB-CI
+trigger:
+  branches:
+    include:
+      - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+
+stages:
+- stage: Build
+  displayName: 'Build and push image B'
+  jobs:  
+  - job: 'Build'
+    displayName: 'Build and push Docker image B'
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker Hub'
+        repository: 'trbooysen/casestudy.service.b'
+        command: 'buildAndPush'
+        Dockerfile: 'DockerfileB'
+
+
