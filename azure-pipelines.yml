@@ -11,26 +11,19 @@ variables:
   ImageName: 'service.a:$(Build.BuildId)'
   dockerRepo: 'casestudy.service.a'
 
+
 stages:
 - stage: Build
-  displayName: Build image
+  displayName: Build and push image
   jobs:  
   - job: Build
     displayName: Build and push Docker image
     steps:
     - task: Docker@2
-      displayName: 'Build the Docker image'
       inputs:
         containerRegistry: 'Docker Hub'
-        command: 'build'
+        repository: 'trbooysen/casestudy.service.a'
+        command: 'buildAndPush'
         Dockerfile: 'DockerfileA'
-        imageName: '$(ImageName)'
-        repository: '$(dockerRepo)'
 
-    - task: Docker@2
-      displayName: 'Push the Docker image to Dockerhub'
-      inputs:
-        containerRegistry: 'Docker Hub'
-        command: 'push'
-        imageName: '$(ImageName)'
-        repository: '$(dockerRepo)'
+
