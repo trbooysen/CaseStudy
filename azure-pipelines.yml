@@ -1,15 +1,27 @@
+name : Docker-ServiceA-CI
 trigger:
-- master
+  branches:
+    include:
+      - master
 
 pool:
-  vmImage: 'Ubuntu-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
-  dockerId: trbooysen
-  imageName: casestudy.service.a
+  ImageName: 'trbooysen/servicea:$(Build.BuildId)'
 
-steps:
-- script: 
-  docker build DockerfileA -t $(dockerId)/$(imageName)
-  docker login --username "$(dockerId)" --password "$(dockerPassword)"
-  docker push $(dockerId)/$(imageName)
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:  
+  - job: Build
+    displayName: Build and push Docker image
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker Hub'
+        repository: 'casestudy.service.a'
+        command: 'build'
+        Dockerfile: 'DockerfileA'
+
+        imageName: '$(ImageName)'
