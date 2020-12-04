@@ -5,12 +5,11 @@ pool:
   vmImage: 'Ubuntu-latest'
 
 variables:
-  imageName: 'dockerimageA'
+  dockerId: trbooysen
+  imageName: casestudy.service.a
 
 steps:
-- task: Docker@2
-  displayName: Build an image
-  inputs:
-    repository: $(imageName)
-    command: build
-    Dockerfile: DockerfileA
+- script: 
+  docker build DockerfileA -t $(dockerId)/$(imageName)
+  docker login --username "$(dockerId)" --password "$(dockerPassword)"
+  docker push $(dockerId)/$(imageName)
