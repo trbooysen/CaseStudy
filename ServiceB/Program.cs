@@ -5,6 +5,9 @@ using System;
 
 namespace ServiceB
 {
+  /// <summary>
+  /// The entry point for ServiceB
+  /// </summary>
   class Program
   {
     static void Main(string[] args)
