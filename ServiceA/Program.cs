@@ -19,7 +19,7 @@ namespace ServiceA
       var messageService = container.Get<ISendMessage>();
       //This should normally be done from the UI (login screen etc.)
       //could also ask for credentials from console
-      if (messageService.SetupChannel("192.168.100.119", "rabbitUser", "rabbitPwd"))
+      if (messageService.SetupChannel("127.0.0.1", "rabbitUser", "rabbitPwd"))
       {
         var sender = new Sender(logger, messageService);
 
