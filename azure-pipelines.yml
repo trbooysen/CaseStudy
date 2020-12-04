@@ -1,11 +1,11 @@
 trigger:
-- main
+- master
 
 pool:
-  vmImage: 'Ubuntu-18.04'
+  vmImage: 'Ubuntu-latest'
 
 variables:
-  imageName: 'pipelines-javascript-docker'
+  imageName: 'dockerimageA'
 
 steps:
 - task: Docker@2
