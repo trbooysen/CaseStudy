@@ -18,10 +18,18 @@ stages:
     displayName: Build and push Docker image
     steps:
     - task: Docker@2
+      displayName: 'Build the Docker image'
       inputs:
         containerRegistry: 'Docker Hub'
         repository: 'casestudy.service.a'
         command: 'build'
         Dockerfile: 'DockerfileA'
+        imageName: '$(ImageName)'
 
+    - task: Docker@2
+      displayName: 'Push the Docker image to Dockerhub'
+      inputs:
+        containerRegistry: 'Docker Hub'
+        repository: 'casestudy.service.a'
+        command: 'push'
         imageName: '$(ImageName)'
